@@ -7,26 +7,15 @@ import Update from './Update';
 import { toast } from 'react-toastify';
 
 const Course=({course})=>{
-  //update course...
-  const updateCourse=(id)=>{
-    axios.get(`/courses/${id}`).then(
-      (response)=>{
-        console.log("loaded...");
-        console.log(response.data);
-
-      },
-      (error)=>{
-        console.log("something went wrong");
-      }
-    );
-  }
   
   const[showModel,setShowModel]=useState(false);
     
   // delete course...
     const deleteCourse=async(id)=>{
-      await axios.post(`/deleteCourse/${id}`)
-                 .then((response)=>{toast.warning(response.data,{position:"bottom-center"})})
+      await axios.post(`https://user.up.railway.app/deleteCourse/${id}`)
+                 .then((response)=>{
+                  toast.warning(response.data,{position:"bottom-center"})
+                  })
                  .catch(error=>console.log(error));
     }
     const closeModel=()=>setShowModel(false);
@@ -47,7 +36,6 @@ const Course=({course})=>{
             <Button variant="warning" 
                     className='ms-1'
                     onClick={()=>{
-                      updateCourse(course.course_id);
                       setShowModel(true);
                     }}>
               Update</Button>

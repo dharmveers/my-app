@@ -1,7 +1,9 @@
 
 import axios from "axios";
 import { Fragment,useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Container, Button , FormGroup,Label,Input, Form } from "reactstrap";
+import { render } from "react-dom";
 
 const AddCourse = () => {
   useEffect(()=>{
@@ -19,11 +21,10 @@ const AddCourse = () => {
   }
   const addCourses=async(e)=>{
         e.preventDefault();
-        alert(course.title+" "+course.author+" "+course.description+" "+course.price);
-        await axios.post('/addCourse',course)
+        await axios.post('https://user.up.railway.app/addCourse',course)
                    .then((response)=>{
-                    alert(response.data)
-                    setCourse({...course,title:'',author:'',description:'',price:0});                    
+                    toast.success(response.data,{position:"top-center"})
+                    render("/add-Course");                   
                   })
                    .catch((error)=>console.log(error));
   }

@@ -8,7 +8,7 @@ const Update = ({closeModel,item}) => {
     const[course,setCourse]=useState(item);
     const update=async(e)=>{
       e.preventDefault();
-      await axios.post('/addCourse',course)
+      await axios.post('https://user.up.railway.app/addCourse',course)
                  .then(()=>{
                   toast.success("Course Updated Successfully",{position:"top-center"})
                   closeModel();

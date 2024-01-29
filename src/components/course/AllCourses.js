@@ -8,14 +8,11 @@ const AllCourses=()=>{
     const [course,setCourse]=useState([])
     
     useEffect(()=>{
-        axios.get('/getCourses').then(
-            (response)=>{
-            toast.success('courses loaded successfully');
-            setCourse(response.data);
-            },
-            (error)=>{
-                toast.error("service unavailable");
-            });
+        axios.get('https://user.up.railway.app/getCourses')
+                    .then((response)=>{
+                     toast.success('courses loaded successfully');
+                     setCourse(response.data);
+                     }).catch(err=>console.log(err));
         document.title="All Courses";    
     },[]); /* first time only hooked */
 
